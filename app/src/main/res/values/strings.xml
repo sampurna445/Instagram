@@ -1,0 +1,7 @@
+<resources>
+  <string name="app_name">JetInstagram</string>
+  <string name="new_post">New Post</string>
+    <string name="favourites_title">Favorites</string>
+  <string name="placeholder_search">Search</string>
+  <string name="favInfoText">New posts from your favorites will appear higher in feed. Only you can see who you add or remove.</string>
+</resources>
