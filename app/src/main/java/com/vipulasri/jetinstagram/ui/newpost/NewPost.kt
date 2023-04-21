@@ -6,10 +6,14 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -27,15 +31,19 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.vipulasri.jetinstagram.R
+import com.vipulasri.jetinstagram.model.places
 import java.util.*
 
 
 @Composable
 fun NewPost(){
+Scaffold(topBar = { Toolbar()}
+) {
     Column(modifier = Modifier.padding(all = 5.dp)) {
-        Toolbar()
-          CaptionSection()
+
+        CaptionSection()
         Divider()
         TagPeopleAddFundRaiser(title = "Tag People")
         Divider()
@@ -48,6 +56,9 @@ fun NewPost(){
         TagPeopleAddFundRaiser(title = "Advanced Settings")
 
     }
+}
+
+
 
 }
 @Composable
@@ -159,52 +170,58 @@ fun TagPeopleAddFundRaiser(
 }
 @Composable
 fun AddLocation(modifier:Modifier = Modifier){
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .height(150.dp)
-        .padding(vertical = 10.dp)
-        ){
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp)
-            .padding(horizontal = 10.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically)
-        {
-            Text("Add Location")
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Add location",
+                style = MaterialTheme.typography.h6.copy(fontSize = 16.sp),
+                color = Color.Black
+            )
             Icon(
-                ImageVector.vectorResource(id = R.drawable.chevron_right),
-                contentDescription = ""
+                Icons.Default.KeyboardArrowRight,
+                contentDescription = "My Drawable",
+                modifier = Modifier.size(24.dp)
             )
         }
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            )
-        {
-            Button(onClick = { },
-                Modifier
-                    .padding(top = 8.dp)
-                    .background(color = Color.LightGray)) {
-                Text("London")
-            }
-            Button(onClick = { },
-                Modifier
-                    .padding(top = 8.dp)
-                    .background(color = Color.LightGray)) {
-                Text("Newcastle")
-            }
-            Button(onClick = { },
-                Modifier
-                    .padding(top = 8.dp)
-                    .background(color = Color.LightGray)) {
-                Text("Birmingham")
+        LocationsRow()
+}
+@Composable
+fun LocationsRow() {
+    LazyRow(
+        Modifier
+            .padding(horizontal = 12.dp),
+        contentPadding = PaddingValues(horizontal = 0.dp),
+        horizontalArrangement = Arrangement.Start,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        items(places) { place ->
+            Card(
+                elevation = 5.dp,
+                shape = RoundedCornerShape(8.dp),
+                modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 8.dp)
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = place,
+                        style = MaterialTheme.typography.body1,
+                        color = Color.Black,
+                        modifier = Modifier.padding(
+                            horizontal = 12.dp,
+                            vertical = 5.dp
+                        )
+                    )
+                }
             }
         }
     }
-
-
 }
 
 @Composable

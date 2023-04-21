@@ -28,3 +28,13 @@ val names = arrayOf(
     "phillsohn",
     "deitch"
 )
+val places = arrayOf(
+    "London-Tower Bridge",
+    "Madame Tussad-London",
+    "London Eye-London",
+    "Covent Garden",
+    "London Bridge",
+    "East India",
+    "East Ham",
+    "Search"
+)
